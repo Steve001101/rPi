@@ -10,3 +10,5 @@ var a = https.createServer(options, function (req, res) {
   res.writeHead(200);
   res.end("hello world\n hi dad");
 }).listen(8000);
+
+console.log('n\This is a test.\n');
