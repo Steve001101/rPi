@@ -4,5 +4,6 @@
     "keywords": ["util", "functional", "server", "client", "browser"],
     "author": "steven",
     "contributors": [],
-    "dependencies": {}
+    "dependencies": {
+    }
 }
