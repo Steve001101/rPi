@@ -1,14 +1,11 @@
-var https = require('https');
-var fs = require('fs');
+var express = require('express');
+var app = express();
 
-var options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-};
+// Authenticator
+app.use(express.basicAuth('testUser', 'testPass'));
 
-var a = https.createServer(options, function (req, res) {
-  res.writeHead(200);
-  res.end("hello world\n hi dad");
-}).listen(8000);
+app.get('/home', function(req, res) {
+ res.send('Hello World');
+});
 
-console.log('n\This is a test.\n');
+app.listen(process.env.PORT || 8080);
