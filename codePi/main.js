@@ -1,13 +1,25 @@
 var express = require('express');
 var app = express();
 
-// Authenticator
-app.use(express.basicAuth(function(user, pass) {
- return user === 'testUser' && pass === 'testPass';
-}));
 
-app.get('/home', function(req, res) {
+// Synchronous
+var auth = express.basicAuth('testUser', 'testPass');
+
+// Synchronous Function
+var auth = express.basicAuth(function(user, pass) {
+ return user === 'testUser' && pass === 'testPass';
+});
+
+// Asynchronous
+var auth = express.basicAuth(function(user, pass, callback) {
+ var result = (user === 'testUser' && pass === 'testPass');
+ callback(null /* error */, result);
+});
+
+app.get('/home', auth, function(req, res) {
  res.send('Hello World');
 });
 
-app.listen(process.env.PORT || 8080);
+app.get('/noAuth', function(req, res) {
+ res.send('Hello World - No Authentication');
+});
